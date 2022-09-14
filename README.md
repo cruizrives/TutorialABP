@@ -8,6 +8,9 @@ Curso del tutorial para el ABP
 - git config --global user.x -> Cambiar a nivel global todas las variables de git
 - git checkout -> Desplazarse entre commits y ramas
 - git fetch -> Visualizar las ramas remotas sin tener que descargarlas
+- git add . -> Añadir todos los cambios al control de versiones
+- git commit -m "x" -> Captura una instantánea de los cambios que hay en el repositorio local y los almacena
+- git push -> Subir los cambios al repositorio remoto
 
 ## Flujo de git
 
