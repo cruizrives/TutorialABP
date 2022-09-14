@@ -12,6 +12,8 @@ Curso del tutorial para el ABP
 - git commit -m "x" -> Captura una instantánea de los cambios que hay en el repositorio local y los almacena
 - git push -> Subir los cambios al repositorio remoto
 - git clone -> Clonar el repositorio remoto en entorno local
+- git branch -d -> Eliminar rama del repositorio local
+- git merge -> Une la rama especificada con la rama en la que se encuentre actualmente
 
 ## Flujo de git
 
