@@ -16,7 +16,7 @@ Curso del tutorial para el ABP
 - git clone -> Clonar el repositorio remoto en entorno local
 - git branch -d -> Eliminar rama del repositorio local
 - git merge -> Une la rama especificada con la rama en la que se encuentre actualmente
-- q -> Salir de terminal de git
+- q -> Salir de la terminal de git
 
 ## Flujo de git
 
