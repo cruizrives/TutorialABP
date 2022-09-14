@@ -1,3 +1,3 @@
 Alumno 1 debe crear rama develop - Hecho
-Alumno 1 debe crear rama feature front-feature1
+Alumno 1 debe crear rama feature front-feature1 - Hecho
 Alumno 2 debe crear rama feature back-feature1 - Hecho
