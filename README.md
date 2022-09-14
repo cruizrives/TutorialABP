@@ -3,7 +3,9 @@ Curso del tutorial para el ABP
 
 ## Comandos de git
 
-- git branch -> Visualizar las ramas
+- git branch -> Visualizar las ramas locales
+- git branch -a -> Visualizar las ramas locales y remotas pero con la información del último pull
+- git checkout -b x -> Crear rama y desplazarse a ella
 - git config --list -> Mostrar las variables de git
 - git config --global user.x -> Cambiar a nivel global todas las variables de git
 - git checkout -> Desplazarse entre commits y ramas
@@ -14,6 +16,7 @@ Curso del tutorial para el ABP
 - git clone -> Clonar el repositorio remoto en entorno local
 - git branch -d -> Eliminar rama del repositorio local
 - git merge -> Une la rama especificada con la rama en la que se encuentre actualmente
+- q -> Salir de terminal de git
 
 ## Flujo de git
 
