@@ -1,2 +1,3 @@
 Alumno 1 debe crear rama develop
+Alumno 1 debe crear rama feature front-feature1
 Alumno 2 debe crear rama feature back-feature1
