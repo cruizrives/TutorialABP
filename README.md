@@ -11,6 +11,7 @@ Curso del tutorial para el ABP
 - git add . -> Añadir todos los cambios al control de versiones
 - git commit -m "x" -> Captura una instantánea de los cambios que hay en el repositorio local y los almacena
 - git push -> Subir los cambios al repositorio remoto
+- git clone -> Clonar el repositorio remoto en entorno local
 
 ## Flujo de git
 
