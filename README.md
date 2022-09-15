@@ -88,3 +88,11 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - MongoDB es una aplicación como servicio que se inicia con el Sistema operativo
 - useCreateIndex: true y useFindAndModify: false están deprecadas por lo que ya no hace falta ponerlas
 - Al conectar la base de datos con el localhost me saltaba el error connect-econnrefused, el cual he solucionado cambiando el host a 127.0.0.1:27017, tanto en Compass como las variables de entorno
+- CompassMongoDB puede creas la base de datos y las colecciones en el caso de que no las tengamos hechas cuando las utilicemos en el código
+
+## Controladores y routers
+
+- Controllers: se almacenan los controladores
+- Routers: se almacenan las rutas
+- Models: se almacenan las representaciones de los objetos almacenados en la base de datos, contamos con los esquemas que define la estructura de los registros de la bd y los modelos que son la conexión entre los esquemas y la bd
+- Flujo de trabajo: llega una petición a index.js que es atendida por el fichero correspondiente en las rutas, y que ejecuta el método dispuesto para ello gracias al controlador, que atiende la petición y envía la respuesta.

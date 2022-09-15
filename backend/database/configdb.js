@@ -22,7 +22,6 @@ const dbConnection = async() => {
     }
 }
 // Exportamos el módulo para ser usado por terceros
-
 module.exports = {
         dbConnection
     }
