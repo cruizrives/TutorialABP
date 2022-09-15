@@ -34,3 +34,7 @@ Para que funcione tuve que:
 Cerrar Vscode
 Introducir rm -rf ~/.config/Code/*Cache*
 Volver a iniciar Vscode en la carpeta del proyecto git
+
+## Network graph
+
+Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen la misma información aparecerán una sobre la otra en el mismo nodo indicando que contienen la misma información, mientras que si tienen distinta información aparecerán en distintos nodos.
