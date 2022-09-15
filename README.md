@@ -38,3 +38,15 @@ Volver a iniciar Vscode en la carpeta del proyecto git
 ## Network graph
 
 Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen la misma información aparecerán una sobre la otra en el mismo nodo indicando que contienen la misma información, mientras que si tienen distinta información aparecerán en distintos nodos.
+
+## Instalación de node y paquetes
+
+- npm install -g x
+- El paquete npm es un instalador que nos permite añadir diferentes extensiones y paquetes. Con -g indicamos que lo hacemos a nivel global
+- Typescript -> tsc -v
+- Angular cli -> ng version
+- Angular cli permite generar aplicaciones de manera muy simple para angular 
+
+## Inicio del proyecto
+
+- npm install express --save -> Paquete de ExpressJS que nos evita programar desde cero todo el código
