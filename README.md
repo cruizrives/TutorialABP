@@ -17,6 +17,9 @@ Curso del tutorial para el ABP
 - git branch -d -> Eliminar rama del repositorio local
 - git merge -> Une la rama especificada con la rama en la que se encuentre actualmente
 - q -> Salir de la terminal de git
+- git fetch -p -> Actualizar la información de ramas que hayan sido borradas en remoto
+- git push origin nombre de la rama a borrar en local:nombre de la rama a borrar en remoto -> Eliminar rama en remoto con un nombre distinto en local y remoto
+- git push origin :nombre de la rama a borrar en remoto -> Eliminar rama en remoto con el mismo nombre en local y remoto
 
 ## Flujo de git
 
