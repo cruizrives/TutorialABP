@@ -56,10 +56,14 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - node index.js -> Para ejecutar el programa js utilizando node
 - npm install 'modulo' -> Para instalar módulos
 - npm uninstall 'modulo' -> Para desinstalar módulos
-- node 'x.js' -> Para comenzar el servidor
+- node 'x.js' -> Para comenzar el servidor con node
+- nodemon 'x.js' -> Para comenzar el servidor con nodemon
+- http://localhost:3000/
 
 
 ### Información
 
 - El archivo package-lock.json hace un seguimiento de la versión exacta de cada paquete
 - El archivo package.json almacena la información clave de la aplicación
+- Paquete nodemon para automatizar el proceso de actualizar la ejecución al realizar cambios
+- Para agilizar el proceso de iniciar el servidor podemos usar scripts de inicio y para poder mostrarlos en la barra lateral hay que ir a los tres puntos al lado de Explorer > NPM Scripts
