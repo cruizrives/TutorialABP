@@ -80,6 +80,7 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 ## Env 
 
 - Permite crear un archivo que contendrá variables de entorno las cuales se llamarán con process.env para agilizar la escritura de código
+- He tenido que quitar del .gitignore el archivo .env
 
 ## Conexión a MongoDB
 
