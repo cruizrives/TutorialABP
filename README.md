@@ -27,4 +27,9 @@ Curso del tutorial para el ABP
 - Rama develop -> Surge de la master y de ella saldrán ramas individuales para implementar distintas características
 - Rama feature -> Surge de la develop y sirve para implementar una tarea
 
+## Problema con git branch
 
+Para que funcione tuve que:
+Cerrar Vscode
+Introducir rm -rf ~/.config/Code/*Cache*
+Volver a iniciar Vscode en la carpeta del proyecto git
