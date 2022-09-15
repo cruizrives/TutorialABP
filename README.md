@@ -45,8 +45,21 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - El paquete npm es un instalador que nos permite añadir diferentes extensiones y paquetes. Con -g indicamos que lo hacemos a nivel global
 - Typescript -> tsc -v
 - Angular cli -> ng version
-- Angular cli permite generar aplicaciones de manera muy simple para angular 
+- Angular cli permite generar aplicaciones de manera muy simple para angular
 
 ## Inicio del proyecto
 
+### Comandos importantes
+
+- npm init -y -> Crea el archivo package.json, estableciendo que se introduzcan las opciones por defecto
 - npm install express --save -> Paquete de ExpressJS que nos evita programar desde cero todo el código
+- node index.js -> Para ejecutar el programa js utilizando node
+- npm install 'modulo' -> Para instalar módulos
+- npm uninstall 'modulo' -> Para desinstalar módulos
+- node 'x.js' -> Para comenzar el servidor
+
+
+### Información
+
+- El archivo package-lock.json hace un seguimiento de la versión exacta de cada paquete
+- El archivo package.json almacena la información clave de la aplicación
