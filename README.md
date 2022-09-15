@@ -67,3 +67,16 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - El archivo package.json almacena la información clave de la aplicación
 - Paquete nodemon para automatizar el proceso de actualizar la ejecución al realizar cambios
 - Para agilizar el proceso de iniciar el servidor podemos usar scripts de inicio y para poder mostrarlos en la barra lateral hay que ir a los tres puntos al lado de Explorer > NPM Scripts
+
+### Postman 
+
+- Se utiliza para almacenar peticiones http en colecciones y poder reenviarlas después más fácilmente así como para poder acceder a más información sobre cada una de ellas
+
+### Cors
+
+- Sirve para poder solicitar recursos restringidos desde un dominio diferente al dominio de origen
+- Cuando se obtiene un error de Cors, esto indica que la web obliga a que el api y la página tengan que estar en el mismo servidor
+
+### Env 
+
+- Permite crear un archivo que contendrá variables de entorno las cuales se llamarán con process.env para agilizar la escritura de código
