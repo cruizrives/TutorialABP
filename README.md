@@ -71,6 +71,7 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 ## Postman 
 
 - Se utiliza para almacenar peticiones http en colecciones y poder reenviarlas después más fácilmente así como para poder acceder a más información sobre cada una de ellas
+- Para incluir datos al hacer la petición, rellenamos el campo body, indicando que es de tipo Raw y configurándolo como JSON
 
 ## Cors
 
@@ -90,9 +91,18 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - Al conectar la base de datos con el localhost me saltaba el error connect-econnrefused, el cual he solucionado cambiando el host a 127.0.0.1:27017, tanto en Compass como las variables de entorno
 - CompassMongoDB puede creas la base de datos y las colecciones en el caso de que no las tengamos hechas cuando las utilicemos en el código
 
-## Controladores y routers
+## Controladores, routers y models
 
 - Controllers: se almacenan los controladores
 - Routers: se almacenan las rutas
 - Models: se almacenan las representaciones de los objetos almacenados en la base de datos, contamos con los esquemas que define la estructura de los registros de la bd y los modelos que son la conexión entre los esquemas y la bd
 - Flujo de trabajo: llega una petición a index.js que es atendida por el fichero correspondiente en las rutas, y que ejecuta el método dispuesto para ello gracias al controlador, que atiende la petición y envía la respuesta.
+
+## Express validator
+
+- Es útil para validar los campos de forma rápida
+- Usamos el método check que por defecto realizará validaciones sobre todos las partes de la request
+
+## Bcryptjs
+
+- Librería para cifrar contraseñas en la base de datos

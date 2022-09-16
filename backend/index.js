@@ -14,18 +14,21 @@ const app = express();
 // Para usar la base de datos
 dbConnection();
 
-// Abrir la aplicación en el puerto 3000
-app.listen(process.env.PORT, () => {
-    console.log('Servidor corriendo en el puerto ' + process.env.PORT);
-});
-
 // La función app.use actúa como middleware
 
 // Indicamos el uso del middleware cors en las rutas
 app.use(cors());
 
+// Middleware para manejar el JSON que llega con las peticiones
+app.use(express.json());
+
 // Para hacer que cualquier cosa que venga con la ruta /api/usuarios sea atendido en la ruta de usuarios
 app.use('/api/usuarios', require('./routes/usuarios'));
+
+// Abrir la aplicación en el puerto 3000
+app.listen(process.env.PORT, () => {
+    console.log('Servidor corriendo en el puerto ' + process.env.PORT);
+});
 
 // A partir de aquí lo comentamos ya que vamos a usar los controladores y rutas
 
