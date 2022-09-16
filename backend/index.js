@@ -1,10 +1,8 @@
 // Importación de módulos
 const express = require('express');
 const cors = require('cors');
-
 // Busca el archivo env en nuestro proyecto y de ahí carga las variables
 require('dotenv').config();
-
 // Para conectar la base de datos, importamos el método dbConnection
 const { dbConnection } = require('./database/configdb');
 
@@ -22,8 +20,10 @@ app.use(cors());
 // Middleware para manejar el JSON que llega con las peticiones
 app.use(express.json());
 
+// Redirigir rutas
 // Para hacer que cualquier cosa que venga con la ruta /api/usuarios sea atendido en la ruta de usuarios
 app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/login', require('./routes/auth'));
 
 // Abrir la aplicación en el puerto 3000
 app.listen(process.env.PORT, () => {
