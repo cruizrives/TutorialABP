@@ -1,41 +1,75 @@
 // Importación de módulos
 const Usuario = require('../models/usuarios');
 const bcrypt = require('bcryptjs');
+const validator = require('validator');
+const Grupo = require('../models/grupos');
 
 // Crea una función que recibe un request y envía un response, la marcamos como async porque después es muy probable que necesitemos que esta espere a resolverse
+// Si la función recibe un id devuelve información de ese usuario en concreto
 const obtenerUsuarios = async(req, res) => {
+    
+    // Obtenemos el id del usuario pasado por la request
+    const id = req.query.id;
 
     // Recibe el parámetro desde y en caso de que no venga o no sea un número lo inicializa a 0
     const desde = Number(req.query.desde) || 0;
     // Número de registros por página
-    const registropp = 5;
+    const registropp = process.env.DOCSPERPAGE;
 
     try {
 
-        // Comprobamos cuántos documentos tiene la colección
-        // const total = await Usuario.countDocuments();
-        // Buscamos en todos los registros de usuarios de la base de datos y devolvemos 10
-        // const usuarios = await Usuario.find({}, "nombre apellidos email rol");
-        // const usuarios = await Usuario.find({}, 'nombre apellidos email rol').skip(desde).limit(registropp);
+        let usuarios, total;
+        // Si recibimos un id comprobamos si es válido
+        if (id) {
+            if (!validator.isMongoId(id)) {
+                return res.json({
+                    ok: false,
+                    msg: 'El id de usuario debe ser válido'
+                });
+            }
+            
+            // Devolvemos la información de ese usuario
+            [usuarios, total] = await Promise.all([
+                Usuario.findById(id).populate('grupo'),
+                Usuario.countDocuments()
+            ]);
 
-        // Como estamos realizando dos llamadas await mejor las lanzamos a la vez con un Promise.all
-        const [usuarios, total] = await Promise.all([
+            // res.json({
+            //     ok: true,
+            //     msg: 'Usuario obtenido',
+            //     // Podemos resumirlo en usuarios ya que creamos un campo con el mismo nombre que la variable que almacena los registros de usuarios
+            //     usuarios: usuarios,
+            // });
+        
+        // Si no recibimos id devolvemos todos los resultados
+        } else {
+
+            // Comprobamos cuántos documentos tiene la colección
+            // const total = await Usuario.countDocuments();
+            // Buscamos en todos los registros de usuarios de la base de datos y devolvemos 10
+            // const usuarios = await Usuario.find({}, "nombre apellidos email rol");
+            // const usuarios = await Usuario.find({}, 'nombre apellidos email rol').skip(desde).limit(registropp);
+            // Como estamos realizando dos llamadas await mejor las lanzamos a la vez con un Promise.all
+            [usuarios, total] = await Promise.all([
             // Obtenemos los usuarios desde el registro indicado hasta el límite de registros a partir del número desde
             // desde = 2 registropp = 5 -> enviaría desde el registro 2, 5 registros más, es decir 7
-            Usuario.find({}, 'nombre apellidos email rol').skip(desde).limit(registropp),
+            Usuario.find({}).skip(desde).limit(registropp).populate('grupo'),
             Usuario.countDocuments()
-        ]);
+            ]);
+        }
 
-
+         
         res.json({
             ok: true,
-            msg: 'Obtener usuarios',
+            msg: 'Usuarios obtenidos',
             // Podemos resumirlo en usuarios ya que creamos un campo con el mismo nombre que la variable que almacena los registros de usuarios
             usuarios: usuarios,
             page: {
                 desde, registropp, total
             }
         });
+
+
     } catch (error) {
         console.log(error);
         return res.status(400).json({

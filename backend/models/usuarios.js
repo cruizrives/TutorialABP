@@ -28,6 +28,8 @@ const UsuarioSchema = Schema({
         required: true,
         default: 'ALUMNO'
     },
+    // Los usuarios tienen grupos asociados
+    grupo: {type: Schema.Types.ObjectId,ref: 'Grupo'},
 
 // Indica el nombre de la colección en la base de datos
 }, { collection: 'usuarios' });

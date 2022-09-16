@@ -24,6 +24,7 @@ app.use(express.json());
 // Para hacer que cualquier cosa que venga con la ruta /api/usuarios sea atendido en la ruta de usuarios
 app.use('/api/usuarios', require('./routes/usuarios'));
 app.use('/api/login', require('./routes/auth'));
+app.use('/api/grupos', require('./routes/grupos'));
 
 // Abrir la aplicación en el puerto 3000
 app.listen(process.env.PORT, () => {
