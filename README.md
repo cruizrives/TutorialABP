@@ -106,3 +106,11 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 ## Bcryptjs
 
 - Librería para cifrar contraseñas en la base de datos
+
+## Jsonwebtoken
+
+- Devuelven un web token
+- Los web tokens son cadenas que contienen información como la id en el campo payload, pero que se encuentran firmadas de modo que nadie va a poder cambiarlas
+- Los token solo se pueden generar por el backend
+- iat es la fecha de generación del token
+- Para comprobar si el token tiene la información correcta y está firmado vamos a https://jwt.io/
