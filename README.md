@@ -120,3 +120,7 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - Las rutas de login generan el token y las rutas de usuarios permiten acceder a ellas solo si se encuentra este token en la cabecera
 - Las peticiones de login deben incorporar la cabecera
 - Solo un token generado por nuestro helper al hacer login será el que pase las validaciones
+
+## Referencias a la base de datos
+
+- Para que funcione es necesario añadir en la petición el id del grupo a conectar con el usuario
