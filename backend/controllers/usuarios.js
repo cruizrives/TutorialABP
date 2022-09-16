@@ -5,15 +5,46 @@ const bcrypt = require('bcryptjs');
 // Crea una función que recibe un request y envía un response, la marcamos como async porque después es muy probable que necesitemos que esta espere a resolverse
 const obtenerUsuarios = async(req, res) => {
 
-    // Buscamos en todos los registros de usuarios de la base de datos y los devolvemos 
-    // const usuarios = await Usuario.find({}, "nombre"); Devolvemos los nombres de los usuarios
-    const usuarios = await Usuario.find({});
-    res.json({
-        ok: true,
-        msg: 'Obtener usuarios',
-        // Podemos resumirlo en usuarios ya que creamos un campo con el mismo nombre que la variable que almacena los registros de usuarios
-        usuarios: usuarios
-    });
+    // Recibe el parámetro desde y en caso de que no venga o no sea un número lo inicializa a 0
+    const desde = Number(req.query.desde) || 0;
+    // Número de registros por página
+    const registropp = 5;
+
+    try {
+
+        // Comprobamos cuántos documentos tiene la colección
+        // const total = await Usuario.countDocuments();
+        // Buscamos en todos los registros de usuarios de la base de datos y devolvemos 10
+        // const usuarios = await Usuario.find({}, "nombre apellidos email rol");
+        // const usuarios = await Usuario.find({}, 'nombre apellidos email rol').skip(desde).limit(registropp);
+
+        // Como estamos realizando dos llamadas await mejor las lanzamos a la vez con un Promise.all
+        const [usuarios, total] = await Promise.all([
+            // Obtenemos los usuarios desde el registro indicado hasta el límite de registros a partir del número desde
+            // desde = 2 registropp = 5 -> enviaría desde el registro 2, 5 registros más, es decir 7
+            Usuario.find({}, 'nombre apellidos email rol').skip(desde).limit(registropp),
+            Usuario.countDocuments()
+        ]);
+
+
+        res.json({
+            ok: true,
+            msg: 'Obtener usuarios',
+            // Podemos resumirlo en usuarios ya que creamos un campo con el mismo nombre que la variable que almacena los registros de usuarios
+            usuarios: usuarios,
+            page: {
+                desde, registropp, total
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({
+            ok:false,
+            msg:'Error obteniendo usuarios'
+        })
+    }
+
+
 }
 
 // Función para crear usuario que envíe respuesta
@@ -62,7 +93,6 @@ try {
         ok:false,
         msg:'Error creando usuario'
     })
-
 }
 }
 

@@ -72,6 +72,7 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 
 - Se utiliza para almacenar peticiones http en colecciones y poder reenviarlas después más fácilmente así como para poder acceder a más información sobre cada una de ellas
 - Para incluir datos al hacer la petición, rellenamos el campo body, indicando que es de tipo Raw y configurándolo como JSON
+- Para incluir una cabecera se introduce el nombre, x significa que es personalizada y el token
 
 ## Cors
 
@@ -114,3 +115,8 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - Los token solo se pueden generar por el backend
 - iat es la fecha de generación del token
 - Para comprobar si el token tiene la información correcta y está firmado vamos a https://jwt.io/
+- Para cada llamada a la API se debe enviar el JWT para poder comprobarlo en el backend
+- El frontend enviará esto en cada llamada que necesite seguridad mediante un header y este deberá ser validado en el backend
+- Las rutas de login generan el token y las rutas de usuarios permiten acceder a ellas solo si se encuentra este token en la cabecera
+- Las peticiones de login deben incorporar la cabecera
+- Solo un token generado por nuestro helper al hacer login será el que pase las validaciones
