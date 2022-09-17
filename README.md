@@ -133,3 +133,10 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 
 - La lógica de negocio debería ir en el controlador
 - La lógica de validación debería ir en el router
+
+## Angular
+
+- npm i -g @angular/cli -> Para instalar la última versión de Angular Cli
+- ng version -> Para saber la versión de Angular Cli
+- ng new frontend -> Para crear el frontend automáticamente, establecemos que use routing y CSS
+- ng serve -o -> Lanzamos un servidor local que ejecuta la aplicación de Angular y el -o es para que lo haga automáticamente
