@@ -9,20 +9,33 @@ const router = Router();
 // Rutas CRUD
 // Ruta base /api/grupos
 // Obtener grupos
-router.get('/', validarJWT, obtenerGrupos);
+router.get('/', [
+    validarJWT,
+    check('id', 'El id del grupo debe ser válido').optional().isMongoId(),
+    check('desde', 'El argumento desde debe ser un número').optional().isNumeric(),
+    validarCampos,
+], obtenerGrupos);
 
 // Crear grupo
 router.post('/', [
     validarJWT,
-    check('nombre', 'El argumento nombre es obligatorio').not().isEmpty(),
+    check('nombre', 'El argumento nombre es obligatorio').not().isEmpty().trim(),
+    check('curso', 'El argumento curso no es válido').isMongoId(),
+    check('alumnos.*.usuario', 'El identificador de alumno no es válido').optional().isMongoId(),
+    check('proyecto').optional().trim(),
+    check('proyectodes').optional().trim(),
     validarCampos,
 ], crearGrupo);
 
 // Actualizar grupo
 router.put('/:id', [
     validarJWT,
-    check('nombre', 'El argumento nombre es obligatorio').not().isEmpty(),
+    check('nombre', 'El argumento nombre es obligatorio').not().isEmpty().trim(),
+    check('curso', 'El argumento curso no es válido').isMongoId(),
     check('id', 'El identificador no es válido').isMongoId(),
+    check('alumnos.*.alumno', 'El identificador de alumno no es válido').optional().isMongoId(),
+    check('proyecto').optional().trim(),
+    check('proyectodes').optional().trim(),
     validarCampos,
 ], actualizarGrupo);
 

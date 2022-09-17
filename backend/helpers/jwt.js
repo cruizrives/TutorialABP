@@ -13,7 +13,7 @@ const generarJWT = (uid, rol) => {
         // Firmamos el payload con una clave y establecemos que expire en un día
         // El sign puede devolver un error o un token
         jwt.sign(payload, process.env.JWTSECRET, {
-            expiresIn: '24h'
+            expiresIn: '500h'
         }, (err, token) => {
             if (err) {
                 console.log(err);

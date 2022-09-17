@@ -92,6 +92,10 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - Al conectar la base de datos con el localhost me saltaba el error connect-econnrefused, el cual he solucionado cambiando el host a 127.0.0.1:27017, tanto en Compass como las variables de entorno
 - CompassMongoDB puede creas la base de datos y las colecciones en el caso de que no las tengamos hechas cuando las utilicemos en el código
 
+## MongoDB
+
+- En el caso de que importe un modelo en la base de datos, y luego modifique algunas propiedades como unique del mismo modelo, tendré que dropear la base de datos para que los cambios se actualicen
+
 ## Controladores, routers y models
 
 - Controllers: se almacenan los controladores

@@ -31,6 +31,7 @@ const obtenerAsignaturas = async(req, res = response) => {
                 // Populamos asignatura para que se pueda recibir información sobre cursos y profesores
                 // El populate va a ir a la colección cursos, que tiene una referencia en asignaturas, y va a devolver toda la información que encuentre
                 // El populate va a ir a la colección profesores y va a extraer los datos de dichos usuarios, además le añadimos un filtro para que no nos devuelva la fecha de alta del usuario, su contraseña ni el campo __v generado automáticamente por la base de datos
+                // Se puede hacer profesores.usuario porque el populate va al modelo de asignaturas que tiene una referencia directa a usuarios
                 Asignatura.findById(id).populate('curso').populate('profesores.usuario', '-password -alta -__v'),
                 Asignatura.countDocuments()
             ]);

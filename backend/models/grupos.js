@@ -1,9 +1,9 @@
+// Importación de módulos
 const { Schema, model } = require('mongoose');
 const GrupoSchema = Schema({
     nombre: {
         type: String,
-        require: true,
-        unique: true
+        require: true
     },
     proyecto: {
         type: String
@@ -11,10 +11,21 @@ const GrupoSchema = Schema({
     proyectodes: {
         type: String
     },
+    curso: {
+        type: Schema.Types.ObjectId,
+        ref: 'Curso',
+        require: true
+    },
+    alumnos: [{
+        usuario: {
+            type: Schema.Types.ObjectId,
+            ref: 'Usuario',
+            require: true
+        }
+    }]
 }, { collection: 'grupos' });
 
-// Se extraen las propiedades v id y password y se dejan el resto en el objeto object
-// Convertimos instancia usuario en un objeto que contiene todo lo que no hemos extraído
+
 GrupoSchema.method('toJSON', function() {
     const { __v, _id, ...object } = this.toObject();
     object.uid = _id;
