@@ -25,6 +25,9 @@ app.use(express.json());
 app.use('/api/usuarios', require('./routes/usuarios'));
 app.use('/api/login', require('./routes/auth'));
 app.use('/api/grupos', require('./routes/grupos'));
+app.use('/api/cursos', require('./routes/cursos'));
+app.use('/api/asignaturas', require('./routes/asignaturas'));
+// app.use('/api/items', require('./routes/items'));
 
 // Abrir la aplicación en el puerto 3000
 app.listen(process.env.PORT, () => {

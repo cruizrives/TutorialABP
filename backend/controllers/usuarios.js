@@ -1,11 +1,12 @@
 // Importación de módulos
 const Usuario = require('../models/usuarios');
 const bcrypt = require('bcryptjs');
-const validator = require('validator');
-const Grupo = require('../models/grupos');
+const Curso = require('../models/cursos');
+
 
 // Crea una función que recibe un request y envía un response, la marcamos como async porque después es muy probable que necesitemos que esta espere a resolverse
 // Si la función recibe un id devuelve información de ese usuario en concreto
+// Sobrecarga para recibir un id y devolver solo los datos necesarios o recibir registro desde y devolver lista paginada
 const obtenerUsuarios = async(req, res) => {
     
     // Obtenemos el id del usuario pasado por la request
@@ -21,25 +22,30 @@ const obtenerUsuarios = async(req, res) => {
         let usuarios, total;
         // Si recibimos un id comprobamos si es válido
         if (id) {
-            if (!validator.isMongoId(id)) {
-                return res.json({
-                    ok: false,
-                    msg: 'El id de usuario debe ser válido'
-                });
-            }
-            
-            // Devolvemos la información de ese usuario
-            [usuarios, total] = await Promise.all([
-                Usuario.findById(id).populate('grupo'),
-                Usuario.countDocuments()
-            ]);
+  
+        // Buscamos si encuentra a un usuario con la id
+        const existeUsuario = await Usuario.findById(id);
 
-            // res.json({
-            //     ok: true,
-            //     msg: 'Usuario obtenido',
-            //     // Podemos resumirlo en usuarios ya que creamos un campo con el mismo nombre que la variable que almacena los registros de usuarios
-            //     usuarios: usuarios,
-            // });
+        // Comprobamos si existe dicho usuario con esa id
+        if (!existeUsuario) {
+            return res.status(400).json({
+            ok: false,
+            msg: 'La id no existe'
+            });
+        }
+            
+        // Devolvemos la información de ese usuario
+        [usuarios, total] = await Promise.all([
+            Usuario.findById(id).populate('grupo'),
+            Usuario.countDocuments()
+        ]);
+
+        // res.json({
+        //     ok: true,
+        //     msg: 'Usuario obtenido',
+        //     // Podemos resumirlo en usuarios ya que creamos un campo con el mismo nombre que la variable que almacena los registros de usuarios
+        //     usuarios: usuarios,
+        // });
         
         // Si no recibimos id devolvemos todos los resultados
         } else {
@@ -57,7 +63,6 @@ const obtenerUsuarios = async(req, res) => {
             Usuario.countDocuments()
             ]);
         }
-
          
         res.json({
             ok: true,
@@ -69,7 +74,6 @@ const obtenerUsuarios = async(req, res) => {
             }
         });
 
-
     } catch (error) {
         console.log(error);
         return res.status(400).json({
@@ -77,12 +81,11 @@ const obtenerUsuarios = async(req, res) => {
             msg:'Error obteniendo usuarios'
         })
     }
-
-
 }
 
 // Función para crear usuario que envíe respuesta
 // Comprobamos los errores de validación de forma genérica usando el middleware en el router para evitar tener que copiar el código por cada método de comprobación de errores
+// Comprobar que no exista usuario con el mismo email y cifrar la contraseña
 const crearUsuario = async (req, res) => {
 
 // Comprobar si el email ya existe
@@ -109,7 +112,9 @@ try {
     const cpassword = bcrypt.hashSync(password, salt); 
 
     // Guardamos el usuario en la bd, utilizando el modelo usuario de la base de datos y haciendo uso del body de la petición para llamar a su constructor
-    const usuario = new Usuario(req.body);
+    const { alta, ...object} = req.body;
+    const usuario = new Usuario(object);
+    // Extraemos el parámetro de alta por si acaso al usuario se le ocurre enviarlo
     usuario.password = cpassword;
     await usuario.save();
         
@@ -131,21 +136,35 @@ try {
 }
 
 // Función para actualizar el usuario
+// Comprobamos que el email a actualizar no exista en otro usuario y que en este caso, sea el mismo que el email del usuario que está intentando realizar la operación
 const actualizarUsuario = async(req, res = response) => {
 
     // Extraemos el password y nos aseguramos de que aunque venga el password no se va a actualizar, porque esto provocaría una brecha de seguridad
     // También extraemos el email para asegurarnos de que este no coincida con ninguno existente en la base de datos
-    const { password, email, grupo, ...object } = req.body;
-    const uid = req.params.id;
+    const { password, email, alta, ...object } = req.body;
 
     // Usamos try catch cada vez que consultemos a la base de datos
     try {
+
+    const uid = req.params.id;
+
+    // Buscamos si encuentra a un usuario con la id
+    const existeUsuario = await Usuario.findById(uid);
+
+    // Comprobamos si existe dicho usuario con esa id
+    if (!existeUsuario) {
+        return res.status(400).json({
+        ok: false,
+        msg: 'La id no existe'
+        });
+    }
 
     // Comprobar si está intentando cambiar el email, que no coincida con alguno que ya esté en BD
     // Obtenemos si hay un usuario en BD con el email que nos llega en post
     const existeEmail = await Usuario.findOne({ email: email });
 
     if (existeEmail) {
+
             // Si existe un usuario con ese email nos aseguramos de que sea el mismo usuario para no asignar a un usuario distinto el email
             if (existeEmail._id != uid) {
                 return res.status(400).json({
@@ -156,6 +175,7 @@ const actualizarUsuario = async(req, res = response) => {
         }
         // Asignamos al object el email validado
         object.email = email;
+
         // Actualizamos los datos del usuario, y con el new indicamos que el objeto usuario a devolver sea el modificado
         const usuario = await Usuario.findByIdAndUpdate(uid, object, { new: true });
 
@@ -175,6 +195,7 @@ const actualizarUsuario = async(req, res = response) => {
 }
 
 // Función para borrar el usuario
+// Recibimos un id de usuario y lo eliminamos
 const borrarUsuario = async(req, res) => {
     const uid = req.params.id;
 

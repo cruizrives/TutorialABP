@@ -11,16 +11,22 @@ const router = Router();
 
 // Ruta base /api/usuarios
 // La ruta '/' a partir de la ruta base, '/api/usuarios', se atiende mediante la función getUsuarios del controlador
-router.get('/', validarJWT, obtenerUsuarios);
+router.get('/', [
+    validarJWT,
+    check('id', 'El id de usuario debe ser válido').optional().isMongoId(),
+    check('desde', 'El argumento desde debe ser un número').optional().isNumeric(),
+    validarCampos,
+], obtenerUsuarios);
 
 // La ruta post a partir de la ruta base, '/api/usuarios'
 // Realizamos las validaciones, el método crea en la petición, en el caso de que los parámetros de entrada no la pasen, un campo de errores
 router.post('/', [
     validarJWT,
-    check('nombre', 'El argumento nombre es obligatorio').not().isEmpty(),
-    check('apellidos', 'El argumento apellidos es obligatorio').not().isEmpty(),
+    check('nombre', 'El argumento nombre es obligatorio').not().isEmpty().trim(),
+    check('apellidos', 'El argumento apellidos es obligatorio').not().isEmpty().trim(),
     check('email', 'El argumento email es obligatorio').not().isEmpty(),
     check('password', 'El argumento password es obligatorio').not().isEmpty(),
+    check('activo', 'El estado activo debe ser true/false').optional().isBoolean(),
     validarCampos,
     validarRol
 ], crearUsuario);
@@ -31,6 +37,7 @@ router.put('/:id', [
     check('apellidos', 'El argumento apellidos es obligatorio').not().isEmpty(),
     check('email', 'El argumento email es obligatorio').not().isEmpty(),
     check('id', 'El identificador no es válido').isMongoId(),
+    check('activo', 'El estado activo debe ser true/false').optional().isBoolean(),
     validarCampos,
     validarRol
 ], actualizarUsuario);

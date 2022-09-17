@@ -124,3 +124,8 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 ## Referencias a la base de datos
 
 - Para que funcione es necesario añadir en la petición el id del grupo a conectar con el usuario
+
+## Validaciones
+
+- La lógica de negocio debería ir en el controlador
+- La lógica de validación debería ir en el router
