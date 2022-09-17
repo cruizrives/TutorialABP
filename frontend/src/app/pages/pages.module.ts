@@ -6,6 +6,7 @@ import { AdminLayoutComponent } from '../layouts/admin-layout/admin-layout.compo
 import { NavbarComponent } from '../commons/navbar/navbar.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { RouterModule } from '@angular/router';
+import { BreadcrumbComponent } from '../commons/breadcrumb/breadcrumb.component';
 
 
 
@@ -15,7 +16,8 @@ import { RouterModule } from '@angular/router';
     NavbarComponent,
     DashboardComponent,
     AdminLayoutComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
