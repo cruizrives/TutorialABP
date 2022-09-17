@@ -134,9 +134,38 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - La lógica de negocio debería ir en el controlador
 - La lógica de validación debería ir en el router
 
+
+## SPA
+
+- En el navegador reside toda la aplicación web menos los datos que son obtenidos de la API
+
 ## Angular
+
+### Comandos
 
 - npm i -g @angular/cli -> Para instalar la última versión de Angular Cli
 - ng version -> Para saber la versión de Angular Cli
-- ng new frontend -> Para crear el frontend automáticamente, establecemos que use routing y CSS
+- ng new frontend -> Para crear el frontend automáticamente, establecemos que use routing, es decir que tenga distintas rutas y CSS
 - ng serve -o -> Lanzamos un servidor local que ejecuta la aplicación de Angular y el -o es para que lo haga automáticamente
+- ng serve -o --port 3000 -> Establecemos el puerto
+- ng generate component nombreCarpeta nombreComponente / ng g c / ng g c --skip-tests -> Crear un componente sin que te genere los spec
+- ng g m / ng g m --flat nombreCarpeta nombreModulo -> Crear un module y ponemos el flat para que no cree una carpeta cuando tenga el mismo nombre que el módulo
+
+### Explicación
+
+- Angular trabaja con componentes que reciben o emiten datos a la API y representan cada uno de los elementos mostrados en el frontend
+- Algunos de estos componentes serán servicios
+- Básicamente los componentes son partes de HTML definidas en la carpeta app, (contiene el css, html, ts o typescript que implementa la lógica de dicho componente) y se incrustan en el index.html
+- La configuración del componente se establece en el ts
+- Cada vez que creamos un componente, este se importa en el archivo module.ts para permitir la incrustación de los nuevos componentes en el original creado por Angular
+
+### Routing
+
+- Se puede crear una ruta padre de la que salen hijas en app-routing.module.ts que se encuentra en el componente inicial creado por Angular
+- Para sintetizar los componentes hijos, hay que especificar en el html del padre la etiqueta <router-outlet><router-outlet>
+
+### Plantilla Matrix de Bootstrap
+
+- Pegamos las carpetas de la plantilla en assets, en total son js, css, images, libs y extra-libs
+
+

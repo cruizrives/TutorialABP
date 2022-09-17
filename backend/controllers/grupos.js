@@ -66,6 +66,7 @@ const obtenerGrupos = async(req, res = repsonse) => {
 // Comprobar que el curso de la asignatura exista, que no haya un grupo con el mismo nombre y que la lista de alumnos sea correcta
 const crearGrupo = async(req, res = response) => {
 
+    // No usamos el id de req.params.id porque curso es un campo que nos envían en la petición y que consiste en el id de dicho curso mientras que el id es un campo que no enviamos en otras peticiones directamente sino que están en la base de datos
     const { nombre, alumnos, curso } = req.body;
 
     try {
