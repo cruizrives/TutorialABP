@@ -19,6 +19,8 @@ const validarJWT = (req, res, next) => {
     // Además vamos a extraer el id y el rol para que estos sean accesibles y certificados
     try {
         const { uid, rol, ...object } = jwt.verify(token, process.env.JWTSECRET);
+
+        // Guardamos el uid y el rol en el objeto req para poder acceder a ellos fácilmente
         req.uid = uid;
         req.rol = rol;
         next();

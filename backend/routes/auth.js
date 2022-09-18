@@ -1,6 +1,6 @@
 // Importación de módulos
 const { Router } = require('express');
-const { login } = require('../controllers/auth');
+const { login, token } = require('../controllers/auth');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middleware/validar-campos');
 const router = Router();
@@ -12,5 +12,11 @@ router.post('/', [
     check('email', 'El argumento email es obligatorio').not().isEmpty(),
     validarCampos,
 ], login);
+
+// Validar el token
+router.post('/token', [
+    check('x-token', 'El argumento x-token es obligatorio').not().isEmpty(),
+    validarCampos,
+], token);
 
 module.exports = router;

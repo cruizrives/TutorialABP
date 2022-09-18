@@ -13194,8 +13194,8 @@ Earnings
       height: 100%;
       margin: 0px;
       position: absolute; }
-  /* .auth-wrapper #recoverform {
-     display: none; } */
+  .auth-wrapper #recoverform {
+     display: none; }
   .auth-wrapper .auth-sidebar {
     position: fixed;
     height: 100%;

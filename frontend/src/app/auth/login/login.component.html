@@ -3,28 +3,51 @@
       <span class="db"><img src="../../assets/images/logo.png" alt="logo" /></span>
   </div>
   <!-- Form -->
-  <form class="form-horizontal m-t-20" id="loginform" action="index.html">
+  <!-- ngSubmit indica que los formularios van a ser controlados por Angular, por lo que se va a invocar la función login -->
+  <!-- Usamos el método formGroup para indicar que este formulario es controlado por Angular -->
+  <form class="form-horizontal m-t-20" id="loginform" (ngSubmit)="login()" [formGroup]="loginForm">
       <div class="row p-b-30">
           <div class="col-12">
               <div class="input-group mb-3">
                   <div class="input-group-prepend">
                       <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
                   </div>
-                  <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required="">
+                  <!-- Usamos el método formControlName para indicar que este campo es controlado por el formulario de Angular -->
+                  <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required="" formControlName="email">
               </div>
               <div class="input-group mb-3">
                   <div class="input-group-prepend">
                       <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
                   </div>
-                  <input type="text" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="">
+                  <!-- Usamos el método formControlName para indicar que este campo es controlado por el formulario de Angular -->
+                  <input type="text" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="" formControlName="password">
               </div>
+              <div class="input-group mb-3">
+                <div class="custom-control custom-checkbox mr-sm-2">
+                  <input type="checkbox" class="custom-control-input" id="customControlAutoSizing1" formControlName="remember">
+                  <label class="custom-control-label text-light" for="customControlAutoSizing1">Recuérdame</label>
+                </div>
+            </div>
           </div>
       </div>
+
+      <div class="row">
+        <div class="col">
+          <!-- Expresión de angular, que se relaciona con la función campoValido del ts y que al recibir un true se ejecuta y al recibir un false no, por lo que para ocultar/mostrar estos mensajes de error, necesitaremos enviarle un booleano variable -->
+          <!-- Al hacer un opuesto, la característica que se supone que debe hacer, la hace al revés,
+          es decir, al recibir un true ejecuta un false, y viceversa -->
+          <!-- True: muestra los mensajes / False: no los muestres (Inversa por la negación)-->
+          <!-- La función *ngIf se va comprobando a tiempo real por lo que no hace falta enviar el formulario -->
+          <p class="text-danger" *ngIf="!campoValido('email')">El usuario es obligatorio y debe ser un email </p>
+          <p class="text-danger" *ngIf="!campoValido('password')"> La contraseña es obligatoria </p>
+        </div>
+      </div>
+
       <div class="row border-top border-secondary">
           <div class="col-12">
               <div class="form-group">
                   <div class="p-t-20">
-                      <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i> Lost password?</button>
+                      <button class="btn btn-info" id="to-recover" type="button"  routerLink="/recovery"><i class="fa fa-lock m-r-5"></i> Recuperar la contraseña </button>
                       <button class="btn btn-success float-right" type="submit">Login</button>
                   </div>
               </div>

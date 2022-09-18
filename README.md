@@ -124,6 +124,8 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - Las rutas de login generan el token y las rutas de usuarios permiten acceder a ellas solo si se encuentra este token en la cabecera
 - Las peticiones de login deben incorporar la cabecera
 - Solo un token generado por nuestro helper al hacer login será el que pase las validaciones
+- Podemos generar un JWT con validez de 1 año 1y, o bien generar en la página oficial un JWT con los parámetros de rol, uid, iat y exp y como en el método validar-jwt no comprobamos la validez de los campos enviados, nos permitirá crear un JWT que será interpretado como válido sin  tener usuarios en la base de datos. También debemos recordar añadir la firma secreta en nuestro fichero .env.
+- Parámetros: {"uid": "632593735e2b4ddca9269af2", "rol": "ADMIN","iat": 1516239022,"exp": 3416239022} 
 
 ## Referencias a la base de datos
 
@@ -168,4 +170,37 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 
 - Pegamos las carpetas de la plantilla en assets, en total son js, css, images, libs y extra-libs
 
+### Rutas en angular
 
+- Añadir a cualquier clase la directiva routerlink="/ruta"
+
+### Formularios template vs reactivos
+
+- Para validar formularios se aceptan los template que se realizan mediante algunas validaciones en el html o los reactivos que se hacen a base de código puro, es mejor usar estos últimos, ya que si no, se ensucia el HTML y es mejor dejar la lógica de negocio en el ts del componente a validar
+
+### Truco opciones de desarrollador
+
+- Pulsar en la rueda de configuración y elegir selected context only para ocultar mensajes de warning de includes de css
+
+### CSS
+
+- He añadido el sitio web http://localhost:4200 a la lista de sitios donde las cookies se borran al cerrar la pestaña, porque si no el navegador no actualizaba los cambios del css
+
+### Servicios
+
+- Sirven para comunicar el backend y el frontend y son fácilmente reutilizables
+
+### LocalStore vs SesionStore
+
+- Porción de la memoria que el navegador pone a disposición de las aplicaciones web para que éstas puedan almacenar ahí lo que quieran
+- La información se guarda en forma de {clave:valor}
+- Este pedazo de información es exclusivo para cada aplicación web
+- Lo almacenado en estas zonas de memoria no es confiable ya que es completamente visible y propenso a borrados, modificaciones, copiados...
+- Lo almacenado en LocalStore no se borra al cerrar el navegador mientras que lo del SesionStore sí lo hace
+- Para acceder a las pestañas del navegador vamos a la sección Application
+
+### Sweetalert2
+
+- https://sweetalert2.github.io/
+- Para importar es necesario usar import Swal from 'sweetalert2'
+- Para bloquear el mensaje de alerta modificamos la propiedad de backdrop
