@@ -7,7 +7,7 @@ import { UsuarioService } from '../services/usuario.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class NoAuthGuard implements CanActivate {
 
   constructor(
     private usuarioService: UsuarioService,
@@ -21,21 +21,15 @@ export class AuthGuard implements CanActivate {
     // Le quitamos el tipado
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    // Podríamos hacer esto, pero realmente el objeto guard en pages.routing ya está actuando como observable así que vamos a usar otro método
-    // this.usuarioService.validarToken().subscribe({
-    //   next: (result:any) => {
-    //     console.log("Dentro del subscribe", result);
-    //   },});
-
-    // Llamamos a la función validarToken y después indicamos que debe realizar otras operaciones con el pipe y tap, porque si la función envía false, lo que ocurre es que se queda atascada en la ruta y aunque no muestra las páginas de dashboard, tampoco avanza a la redirección
-    return this.usuarioService.validarToken()
+    // Comprobamos si hay token
+    return this.usuarioService.validarNoToken()
     // Recibe la respuesta con el pipe y opera con ella
       .pipe(
         // Ejecuta operaciones secundarias
         tap( resp=>{
-          // Si no se recibe respuesta, es decir conseguimos un error, significa que no queremos dejar que el usuario navegue por las rutas de dashboard porque no ha sido validado
+          // Si no se recibe respuesta, es decir conseguimos un error, significa que no queremos dejar que el usuario navegue por las rutas de login porque ha sido validado
           if (!resp){
-            this.router.navigateByUrl('/login')
+            this.router.navigateByUrl('/dashboard')
           }
         })
       );

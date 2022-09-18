@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
 
   // Variable para impedir que las validaciones no salgan hasta que hayamos enviado el formulario
   public formSubmit = false;
+  // Variable para comprobar si sale el icono de esperando
+  public waiting = false;
 
   // Insertamos el componente FormBuilder necesario para conectar con el formulario del html
   constructor(
@@ -27,12 +29,22 @@ export class LoginComponent implements OnInit {
   public loginForm = this.fb.group({
     // Estado de los campos por defecto
     email: [ localStorage.getItem('email')||'', [Validators.required, Validators.email]],
-    password: ['12trica34', [Validators.required]],
+    password: ['', [Validators.required]],
     // Ponemos el || de forma que si el checkbox estaba marcado para recordar el email, en el caso en el que esa opción hubiera estado marcada, la segunda parte de la condición será un true, así que se establecerá el valor del checkbox en true
     remember: [false || localStorage.getItem('email')]
   })
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    // Si el usuario con token intenta ir a login no debería poder hacerlo, por lo que siempre que tenga token, será redirigido a dashboard
+    // Esto no es lo mejor ya que solo sirve para una ruta
+    // this.usuarioService.validarToken().subscribe({
+    //   next: (result) => {
+    //     if (result){
+    //       this.router.navigateByUrl('dashboard');
+    //     }
+    //   },});
+  }
 
   // Se ejecuta al enviar el formulario
   login (){
@@ -42,14 +54,14 @@ export class LoginComponent implements OnInit {
 
     if (!this.loginForm.valid) {
       console.warn("Errores en el formulario");
+      // Hacemos este return para que cuando haya errores en el formulario no se lance la petición
+      return;
     }
-
+    this.waiting = true;
     // Llamamos al servicio para conectar frontend con backend
     // Indicamos el subscribe porque la función login es observable lo que indica que necesita de una respuesta
     this.usuarioService.login(this.loginForm.value).subscribe({
-      next: (result:any)=>{
-        console.log(result);
-        localStorage.setItem('token', result.token);
+      next: ()=>{
         this.router.navigateByUrl('/dashboard');
 
         if (this.loginForm.get('remember')?.value){
@@ -59,17 +71,20 @@ export class LoginComponent implements OnInit {
         else {
           localStorage.removeItem('email');
         }
+        this.waiting=false;
 
       },
       error: (err:any)=>{
         console.warn('Error de la api', err);
         Swal.fire({
           title: '¡Error!',
-          text: err.error.msg,
+          // En el caso de que se lance un error no del backend sino de otra parte se devuelve un mensaje más amigable
+          text: err.error.msg || 'No se pudo completar la acción, por favor inténtelo más tarde',
           icon: 'error',
           confirmButtonText: 'Ok',
-          backdrop: false
+          allowOutsideClick: false
         })
+        this.waiting=false;
       }
     });
   }

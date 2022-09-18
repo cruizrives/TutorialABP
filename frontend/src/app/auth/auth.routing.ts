@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NoAuthGuard } from '../guards/no-auth.guard';
 import { AuthLayoutComponent } from '../layouts/auth-layout/auth-layout.component';
 import { LoginComponent } from './login/login.component';
 import { RecoveryComponent } from './recovery/recovery.component';
@@ -21,14 +22,16 @@ import { RecoveryComponent } from './recovery/recovery.component';
 
 const routes: Routes = [
   {
-    path:'login', component: AuthLayoutComponent,
+    // La guarda va a devolver un true o un false
+    // Cuando se invoca cualquiera de las rutas login se llama a la guarda
+    path:'login', component: AuthLayoutComponent, canActivate: [NoAuthGuard],
     children: [
       // Si pongo login y nada más me lleva al login
       {path:'', component: LoginComponent},
     ]
   },
   {
-    path:'recovery', component: AuthLayoutComponent,
+    path:'recovery', component: AuthLayoutComponent, canActivate: [NoAuthGuard],
     children: [
       // Si pongo recovery y nada más me lleva al recovery
       {path:'', component: RecoveryComponent},

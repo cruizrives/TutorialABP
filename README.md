@@ -209,3 +209,7 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 
 - Protecciones en las rutas que controlan bajo qué condiciones se renderiza la ruta
 - Cuando aplicas una guard a una ruta, ésta también se aplicará a las hijas
+
+### Truco
+
+- Cuando falla la web, cierra las ejecuciones de servidores y ábrelas de nuevo en otro navegador

@@ -26,7 +26,6 @@ const routes: Routes = [
     // Cuando se invoca cualquiera de las rutas dashboard se llama a la guarda
     // Las guardas son observables que al final tienen que devolver true o false
     path:'dashboard', component: AdminLayoutComponent, canActivate: [AuthGuard],
-    // path:'dashboard', component: AdminLayoutComponent,
     children: [
       // Si pongo dashboard y nada más me lleva al dashboard
       {path:'', component: DashboardComponent},
