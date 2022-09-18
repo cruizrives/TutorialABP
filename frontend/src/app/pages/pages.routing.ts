@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../guards/auth.guard';
 import { AdminLayoutComponent } from '../layouts/admin-layout/admin-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
@@ -21,7 +22,11 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 const routes: Routes = [
 
   {
-    path:'dashboard', component: AdminLayoutComponent,
+    // La guarda va a devolver un true o un false
+    // Cuando se invoca cualquiera de las rutas dashboard se llama a la guarda
+    // Las guardas son observables que al final tienen que devolver true o false
+    path:'dashboard', component: AdminLayoutComponent, canActivate: [AuthGuard],
+    // path:'dashboard', component: AdminLayoutComponent,
     children: [
       // Si pongo dashboard y nada más me lleva al dashboard
       {path:'', component: DashboardComponent},
