@@ -204,3 +204,8 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - https://sweetalert2.github.io/
 - Para importar es necesario usar import Swal from 'sweetalert2'
 - Para bloquear el mensaje de alerta modificamos la propiedad de backdrop
+
+### Guards
+
+- Protecciones en las rutas que controlan bajo qué condiciones se renderiza la ruta
+- Cuando aplicas una guard a una ruta, ésta también se aplicará a las hijas

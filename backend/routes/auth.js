@@ -14,7 +14,7 @@ router.post('/', [
 ], login);
 
 // Validar el token
-router.post('/token', [
+router.get('/token', [
     check('x-token', 'El argumento x-token es obligatorio').not().isEmpty(),
     validarCampos,
 ], token);
