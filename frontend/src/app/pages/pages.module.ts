@@ -7,6 +7,7 @@ import { NavbarComponent } from '../commons/navbar/navbar.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbComponent } from '../commons/breadcrumb/breadcrumb.component';
+import { ProgressbarComponent } from '../components/progressbar/progressbar.component';
 
 
 
@@ -17,7 +18,8 @@ import { BreadcrumbComponent } from '../commons/breadcrumb/breadcrumb.component'
     DashboardComponent,
     AdminLayoutComponent,
     UsuariosComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    ProgressbarComponent,
   ],
   imports: [
     CommonModule,

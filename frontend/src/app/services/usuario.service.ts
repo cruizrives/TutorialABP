@@ -31,8 +31,7 @@ export class UsuarioService {
 
   // Eliminar el token del usuario
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('rol');
+    this.limpiarLocalStore();
     this.router.navigateByUrl('/login');
   }
 
@@ -42,6 +41,7 @@ export class UsuarioService {
     const token = localStorage.getItem('token') || '';
 
     if (token===''){
+      this.limpiarLocalStore();
       return of(incorrecto);
     }
     // Si lo hay hago la llamada y con la respuesta
@@ -63,7 +63,7 @@ export class UsuarioService {
           catchError (err =>{
             console.warn(err);
             // Si no pongo esto, en el caso de que el usuario se haya validado con un token y se caiga el servidor, al refrescar la página, se lanzaría la petición para comprobar la validez del token que fallaría, pero también la del no token, por ello si quitamos el token al surgir un error, al menos nos aseguramos de que solo se lance una vez la petición
-            localStorage.removeItem('token');
+            this.limpiarLocalStore();
             return of(incorrecto);
           })
         )
@@ -110,5 +110,10 @@ export class UsuarioService {
   validarNoToken():Observable<boolean>{
     // Si no hay token devuelvo true, si lo hay false
     return this.validar(false, true);
+  }
+
+  limpiarLocalStore(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('rol');
   }
 }

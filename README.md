@@ -229,3 +229,16 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - Además, también se le puede pasar información mediante data
 - Para filtrar los activation que nos interese, podemos usar un filter para que solo muestre los eventos de este tipo, y además, observando el snapshot, nos damos cuenta gracias a la propiedad firstChild, que los eventos que nos interesan, (es decir los primeros que llegan), son aquellos que tienen esa propiedad a null
 - Como nos hemos suscrito a los ActivationEnd, éstos se van lanzando continuamente por lo que hay que crear una variable para desuscribirse
+
+### Inputs
+
+- Sirven para comunicar componentes padres con componentes hijos mediante la declaración de variables @Input
+
+### Outputs 
+
+- Sirven para comunicar componentes hijos con componentes padres mediante eventos
+
+### Property value expected & property value expected
+
+- Errores que surgieron al añadir código ts en una propiedad css, para solucionarlo fui a: 
+settings: Extensions: HTML: Validate: Styles y a la opción "Controls whether the built-in HTML language support validates embedded styles, y la desmarqué

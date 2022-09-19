@@ -12,4 +12,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  eventoEmitido(valor:number){
+    console.log("Evento emitido, se ha incrementado el progress bar", valor, "unidad");
+  }
+
 }
