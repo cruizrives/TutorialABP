@@ -19,6 +19,7 @@ const token = async(req, res=response) => {
 
         // También hay que validar si el usuario del que nos llega el token está en la base de datos, de esta forma si creamos tokens que no hayan sido generados por un usuario de la BD saltará el error
         const usuarioBD = await Usuario.findById(uid);
+        const nrol = usuarioBD.rol;
         if (!usuarioBD) {
             return res.status(400).json({
                 ok: false,
@@ -31,6 +32,8 @@ const token = async(req, res=response) => {
         return res.json({
             ok: true,
             msg: 'Token',
+            rol: nrol,
+            _id: uid,
             token:nuevoToken
         });
         
@@ -75,10 +78,13 @@ const login = async(req, res = response) => {
     // Invocamos la promesa para generar el token
     // A la función para generar el JWT le tenemos que pasar el id de la base de datos, el cual obtendremos del usuario validado y el rol
     const token = await generarJWT(usuarioBD._id, usuarioBD.rol);
+    const { _id, rol } = usuarioBD;
 
     res.json({
         ok:true,
         msg:'login',
+        rol,
+        _id,
         token
     })
 
