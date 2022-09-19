@@ -27,9 +27,19 @@ const routes: Routes = [
     // Las guardas son observables que al final tienen que devolver true o false
     path:'dashboard', component: AdminLayoutComponent, canActivate: [AuthGuard],
     children: [
+
       // Si pongo dashboard y nada más me lleva al dashboard
-      {path:'', component: DashboardComponent},
-      {path:'usuarios', component: UsuariosComponent},
+      {path:'', component: DashboardComponent, data: {
+        titulo: 'Dashboard',
+        breadcrumbs:[] // En breadcrums indicamos el elemento que va antes
+      }},
+
+      {path:'usuarios', component: UsuariosComponent, data: {
+        titulo: 'Usuarios',
+        breadcrumbs:[ {titulo: 'Dashboard', url:'/dashboard'}]
+
+      }},
+
       {path:'**', redirectTo:''},
     ]
   },

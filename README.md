@@ -212,4 +212,20 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 
 ### Truco
 
-- Cuando falla la web, cierra las ejecuciones de servidores y ábrelas de nuevo en otro navegador
+- Cuando falla la web, cierra las ejecuciones de servidores y ábrelas de nuevo
+
+### Cargar scripts externos de forma global
+
+- Debido a la forma en la que tenemos el router, no pasamos por index.html por lo que algunas funciones de javascript (jquery) no se ejecutan, así que necesitamos cargarlas cada vez que nos movamos entre los layouts de Angular
+- Para ello en el archivo custom.min.js y sidebar.min.js, creamos una función que contenga todo el contenido del archivo y lo invocamos desde los layouts auth y admin, además, hay que tener en cuenta que los archivos están declarados de manera global en el index.html
+- A veces ts no reconoce la declaración y por eso hay que indicarle que sí lo está usando con declare function x
+
+### Breadcrums
+
+- Barra con enlaces que le sirve al usuario para indicarle en qué ruta está
+- El objeto router tiene clases que capturan eventos que se producen al cambiar de ruta
+- De estos eventos, nos interesa comprobar los ActivationEnd, y de éstos, solo aquellos que contengan información
+- Alguna de estas clases poseen objetos que contienen snapshots o capturas de los parámetros de dicha ruta entre otros elementos
+- Además, también se le puede pasar información mediante data
+- Para filtrar los activation que nos interese, podemos usar un filter para que solo muestre los eventos de este tipo, y además, observando el snapshot, nos damos cuenta gracias a la propiedad firstChild, que los eventos que nos interesan, (es decir los primeros que llegan), son aquellos que tienen esa propiedad a null
+- Como nos hemos suscrito a los ActivationEnd, éstos se van lanzando continuamente por lo que hay que crear una variable para desuscribirse

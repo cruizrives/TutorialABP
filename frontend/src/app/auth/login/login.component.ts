@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
 
   // Se ejecuta al enviar el formulario
   login (){
-
     this.formSubmit = true;
     console.log(this.loginForm);
 

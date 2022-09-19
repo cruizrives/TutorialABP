@@ -23,7 +23,8 @@
 
                       <!-- Si tiene submenú -->
                       <div *ngIf="item.sub">
-                        <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"  data-toggle="collapse" data-target="#demo">
+                        <!-- <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"  data-toggle="collapse" data-target="#demo"> -->
+                          <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                           <i class="{{item.icono}}"></i>
                           <span class="hide-menu"> {{item.titulo}} </span>
                         </a>
@@ -32,9 +33,11 @@
                         <!-- Pero la clase collapse no funcionaba, iba así: -->
                         <!-- Aquí es donde está la propiedad collapse .collapse:not(.show) {display: none;} -->
                         <!-- El selector :not indica que a las clases afectadas no se les aplicará la propiedad -->
-
-                        <!-- Como no iba tuve que cambiar el método con data-toggle y data-target  -->
+                        <!-- Como no iba tuve que cambiar el método con data-toggle y data-target
                         <ul aria-expanded="false" class="first-level" id="demo" class="collapse">
+                        -->
+                        <!-- Pero después encontré la solución -->
+                        <ul aria-expanded="false" class="first-level collapse">
                           <!-- Recorremos los submenús -->
                           <li class="sidebar-item" *ngFor="let subitem of item.subMenu" class="sidebar-link" >
                             <a [routerLink]="subitem.url" class="sidebar-link">

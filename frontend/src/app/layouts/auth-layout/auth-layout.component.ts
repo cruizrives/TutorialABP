@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+declare function iniciarCustom():any;
+declare function iniciarSideBar():any;
+
+
 @Component({
   selector: 'app-auth-layout',
   templateUrl: './auth-layout.component.html',
@@ -10,6 +14,8 @@ export class AuthLayoutComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    iniciarCustom();
+    iniciarSideBar();
   }
 
 }

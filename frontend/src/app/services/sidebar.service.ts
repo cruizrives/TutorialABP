@@ -8,32 +8,29 @@ export class SidebarService {
 
   menuAdmin: sidebarItem[] = [
     {titulo: 'Dashboard admin', icono:'mdi mdi-view-dashboard', sub: false, url: '/dashboard'},
-    {titulo: 'Usuarios', icono:'mdi mdi-account', sub: false, url: '/dashboard/usuarios'},
-    {titulo: 'Otro', icono:'mdi mdi-multiplication', sub: false, url: '/dashboard/otro'},
-    {titulo: 'Submenu', icono:'mdi mdi-arrow-down', sub: true, subMenu: [
-      {titulo: 'Opción 1', icono: 'mdi mdi-numeric-1-box-outline', url: 'dashboard/uno'},
+    {titulo: 'Gestión de usuarios', icono:'mdi mdi-arrow-down', sub: true, subMenu: [
+      {titulo: 'Usuarios', icono: 'mdi mdi-account', url: '/dashboard/usuarios'},
       {titulo: 'Opción 2', icono: 'mdi mdi-numeric-2-box-outline', url: 'dashboard/dos'},
-    ]}
+    ]},
+    {titulo: 'Otro', icono:'mdi mdi-multiplication', sub: false, url: '/dashboard/otro'}
   ];
 
   menuProf: sidebarItem[] = [
-    {titulo: 'Dashboard profesor', icono:'mdi mdi-view-dashboard', sub: false, url: '/dashboard'},
-    {titulo: 'Usuarios', icono:'mdi mdi-account', sub: false, url: '/dashboard/usuarios'},
-    {titulo: 'Otro', icono:'mdi mdi-multiplication', sub: false, url: '/dashboard/otro'},
-    {titulo: 'Submenu', icono:'mdi mdi-arrow-down', sub: true, subMenu: [
-      {titulo: 'Opción 1', icono: 'mdi mdi-numeric-1-box-outline', url: 'dashboard/uno'},
+    {titulo: 'Dashboard profesores', icono:'mdi mdi-view-dashboard', sub: false, url: '/dashboard'},
+    {titulo: 'Gestión de usuarios', icono:'mdi mdi-arrow-down', sub: true, subMenu: [
+      {titulo: 'Usuarios', icono: 'mdi mdi-account', url: '/dashboard/usuarios'},
       {titulo: 'Opción 2', icono: 'mdi mdi-numeric-2-box-outline', url: 'dashboard/dos'},
-    ]}
+    ]},
+    {titulo: 'Otro', icono:'mdi mdi-multiplication', sub: false, url: '/dashboard/otro'}
   ];
 
   menuAlu: sidebarItem[] = [
     {titulo: 'Dashboard alumno', icono:'mdi mdi-view-dashboard', sub: false, url: '/dashboard'},
-    {titulo: 'Usuarios', icono:'mdi mdi-account', sub: false, url: '/dashboard/usuarios'},
-    {titulo: 'Otro', icono:'mdi mdi-multiplication', sub: false, url: '/dashboard/otro'},
-    {titulo: 'Submenu', icono:'mdi mdi-arrow-down', sub: true, subMenu: [
-      {titulo: 'Opción 1', icono: 'mdi mdi-numeric-1-box-outline', url: 'dashboard/uno'},
+    {titulo: 'Gestión de usuarios', icono:'mdi mdi-arrow-down', sub: true, subMenu: [
+      {titulo: 'Usuarios', icono: 'mdi mdi-account', url: '/dashboard/usuarios'},
       {titulo: 'Opción 2', icono: 'mdi mdi-numeric-2-box-outline', url: 'dashboard/dos'},
-    ]}
+    ]},
+    {titulo: 'Otro', icono:'mdi mdi-multiplication', sub: false, url: '/dashboard/otro'}
   ];
 
   constructor() { }

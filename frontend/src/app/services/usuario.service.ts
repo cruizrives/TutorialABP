@@ -54,6 +54,7 @@ export class UsuarioService {
           // Almaceno el nuevo token en localStorage
           tap( (res:any) => {
             localStorage.setItem('token', res.token);
+            localStorage.setItem('rol', res.rol);
           }),
           map (res =>{
             return correcto;

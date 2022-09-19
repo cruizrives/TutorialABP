@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+declare function iniciarCustom():any;
+declare function iniciarSideBar():any;
+
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
@@ -10,6 +13,8 @@ export class AdminLayoutComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    iniciarCustom();
+    iniciarSideBar();
   }
 
 }
