@@ -39,7 +39,7 @@ const obtenerItems = async(req, res = response) => {
             ]);
         }
 
-        res.status(400).json({
+        res.json({
             ok: true,
             msg: 'obtenerItems',
             items,
@@ -146,7 +146,7 @@ const borrarItem = async(req, res = response) => {
         // Comprobamos si existe el ítem que queremos borrar
         const existeItem = await Item.findById(uid);
         if (!existeItem) {
-            return res.status(400).json({
+            return res.json({
                 ok: true,
                 msg: 'El item no existe'
             });

@@ -73,6 +73,8 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 - Se utiliza para almacenar peticiones http en colecciones y poder reenviarlas después más fácilmente así como para poder acceder a más información sobre cada una de ellas
 - Para incluir datos al hacer la petición, rellenamos el campo body, indicando que es de tipo Raw y configurándolo como JSON
 - Para incluir una cabecera se introduce el nombre, x significa que es personalizada y el token
+- Para enviar archivos en postman, se cambia el body a form-data y se añade en el key que va a ser de tipo file
+- El working directory de postman es C:\Users\cruiz\Postman\files
 
 ## Cors
 
@@ -242,3 +244,9 @@ Muestra las ramas y sus estados como nodos, de forma que cuando dos ramas tienen
 
 - Errores que surgieron al añadir código ts en una propiedad css, para solucionarlo fui a: 
 settings: Extensions: HTML: Validate: Styles y a la opción "Controls whether the built-in HTML language support validates embedded styles, y la desmarqué
+
+## Manipular archivos con Express-fileupload y uuid
+
+- Transforma la request para poder modificarla
+- Para que todas las rutas tengan que pasar por este Middleware es necesario hacer una configuración a nivel global con el app.use(fileUpload()) en index.js
+- Al usar la función mv, la carpeta se crea en la raíz de la unidad, en este caso en el disco local C:

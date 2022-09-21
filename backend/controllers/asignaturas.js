@@ -248,7 +248,7 @@ const borrarAsignatura = async(req, res = response) => {
         // Comprobamos si existe la asignatura que queremos borrar
         const existeAsignatura = await Asignatura.findById(uid);
         if (!existeAsignatura) {
-            return res.status(400).json({
+            return res.json({
                 ok: true,
                 msg: 'La asignatura no existe'
             });

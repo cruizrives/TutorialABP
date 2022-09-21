@@ -44,7 +44,7 @@ const obtenerGrupos = async(req, res = repsonse) => {
             ]);
         }
         
-        res.status(400).json({
+        res.json({
             ok: true,
             msg: 'obtenerGrupos',
             grupos,
@@ -214,7 +214,7 @@ const borrarGrupo = async(req, res = response) => {
         // Comprobamos si existe el usuario que queremos borrar
         const existeGrupo = await Grupo.findById(uid);
         if (!existeGrupo) {
-            return res.status(400).json({
+            return res.json({
                 ok: true,
                 msg: 'El grupo no existe'
             });

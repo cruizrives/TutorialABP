@@ -183,7 +183,7 @@ const borrarCurso = async(req, res) => {
         // Comprobamos si existe el curso que queremos borrar
         const existeCurso = await Curso.findById(uid);
         if (!existeCurso) {
-            return res.status(400).json({
+            return res.json({
                 ok: true,
                 msg: 'El curso no existe'
             });
