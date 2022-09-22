@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
   // Se suscribe al validarToken y en caso de que la respuesta
   canActivate(
-    route: ActivatedRouteSnapshot,
+    next: ActivatedRouteSnapshot,
     // state: RouterStateSnapshot){
 
     // Le quitamos el tipado
@@ -33,10 +33,27 @@ export class AuthGuard implements CanActivate {
       .pipe(
         // Ejecuta operaciones secundarias
         tap( resp=>{
+
           // Si no se recibe respuesta, es decir conseguimos un error, significa que no queremos dejar que el usuario navegue por las rutas de dashboard porque no ha sido validado
-          if (!resp){
-            this.router.navigateByUrl('/login')
-          }
+          if (!resp) {
+            this.router.navigateByUrl('/login');
+          } else {
+
+                // Si la ruta no es para el rol del token, reenviamos a ruta base de rol del token
+                if ((next.data['rol'] !== '*') && (this.usuarioService.rol !== next.data['rol'])) {
+                  switch (this.usuarioService.rol) {
+                    case 'ADMIN':
+                      this.router.navigateByUrl('/admin/dashboard');
+                      break;
+                    case 'ALUMNO':
+                      this.router.navigateByUrl('/alu/dashboard');
+                      break;
+                    case 'PROFESOR':
+                      this.router.navigateByUrl('/prof/dashboard');
+                      break;
+            }
+
+          }}
         })
       );
   }

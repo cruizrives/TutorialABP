@@ -29,7 +29,20 @@ export class NoAuthGuard implements CanActivate {
         tap( resp=>{
           // Si no se recibe respuesta, es decir conseguimos un error, significa que no queremos dejar que el usuario navegue por las rutas de login porque ha sido validado
           if (!resp){
-            this.router.navigateByUrl('/dashboard')
+
+              switch (this.usuarioService.rol) {
+                case 'ADMIN':
+                  this.router.navigateByUrl('/admin/dashboard');
+                  break;
+                case 'ALUMNO':
+                  this.router.navigateByUrl('/alu/dashboard');
+                  break;
+                case 'PROFESOR':
+                  this.router.navigateByUrl('/prof/dashboard');
+                  break;
+              }
+
+            // this.router.navigateByUrl('/dashboard')
           }
         })
       );

@@ -139,7 +139,7 @@ export class UsuarioService {
     return this.http.post(`${environment.base_url}/usuarios/`, data, this.cabeceras);
   }
 
-  actualizarUsuario ( uid: string, data: Usuario) {
+  actualizarUsuario ( uid: string, data: Usuario | Partial<{ email: string | null; nombre: string | null; apellidos: string | null; imagen: string | null; }>) {
     return this.http.put(`${environment.base_url}/usuarios/${uid}`, data, this.cabeceras);
   }
 

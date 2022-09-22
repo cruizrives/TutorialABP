@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { sidebarItem } from '../interfaces/sidebar.interface';
+import { UsuarioService } from './usuario.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,39 +8,33 @@ import { sidebarItem } from '../interfaces/sidebar.interface';
 export class SidebarService {
 
   menuAdmin: sidebarItem[] = [
-    {titulo: 'Dashboard admin', icono:'mdi mdi-view-dashboard', sub: false, url: '/dashboard'},
-    {titulo: 'Gestión de usuarios', icono:'mdi mdi-arrow-down', sub: true, subMenu: [
-      {titulo: 'Usuarios', icono: 'mdi mdi-account', url: '/dashboard/usuarios'},
-      {titulo: 'Opción 2', icono: 'mdi mdi-numeric-2-box-outline', url: 'dashboard/dos'},
-    ]},
-    {titulo: 'Otro', icono:'mdi mdi-multiplication', sub: false, url: '/dashboard/otro'}
+    {titulo: 'Dashboard admin', icono:'fa fa-tachometer-alt', sub: false, url: '/admin/dashboard'},
+    { titulo: 'Gestión usuarios', icono: 'mdi mdi-arrow-down', sub: true, subMenu: [
+      { titulo: 'Usuarios', icono: 'fa fa-users', url: '/admin/usuarios'},
+      { titulo: 'Usuario', icono: 'fa fa-user', url: '/admin/usuarios/usuario/:uid'},
+    ]
+
+  },
   ];
 
+
   menuProf: sidebarItem[] = [
-    {titulo: 'Dashboard profesores', icono:'mdi mdi-view-dashboard', sub: false, url: '/dashboard'},
-    {titulo: 'Gestión de usuarios', icono:'mdi mdi-arrow-down', sub: true, subMenu: [
-      {titulo: 'Usuarios', icono: 'mdi mdi-account', url: '/dashboard/usuarios'},
-      {titulo: 'Opción 2', icono: 'mdi mdi-numeric-2-box-outline', url: 'dashboard/dos'},
-    ]},
-    {titulo: 'Otro', icono:'mdi mdi-multiplication', sub: false, url: '/dashboard/otro'}
+    {titulo: 'Dashboard profesores', icono:'fa fa-tachometer-alt', sub: false, url: 'prof/dashboard'},
   ];
 
   menuAlu: sidebarItem[] = [
-    {titulo: 'Dashboard alumno', icono:'mdi mdi-view-dashboard', sub: false, url: '/dashboard'},
-    {titulo: 'Gestión de usuarios', icono:'mdi mdi-arrow-down', sub: true, subMenu: [
-      {titulo: 'Usuarios', icono: 'mdi mdi-account', url: '/dashboard/usuarios'},
-      {titulo: 'Opción 2', icono: 'mdi mdi-numeric-2-box-outline', url: 'dashboard/dos'},
-    ]},
-    {titulo: 'Otro', icono:'mdi mdi-multiplication', sub: false, url: '/dashboard/otro'}
+    {titulo: 'Dashboard alumno', icono:'fa fa-tachometer-alt', sub: false, url: 'alu/dashboard'},
   ];
 
-  constructor() { }
+  none: sidebarItem[]=[
+    { titulo: 'error', icono: 'fa fa-exclamation-triangle', sub: false, url: '/error'}]
+
+  constructor(private usuarioService: UsuarioService) { }
 
   getMenu(){
 
-    const rol = localStorage.getItem('rol');
 
-    switch (rol) {
+    switch (this.usuarioService.rol) {
       case 'ADMIN':
         return this.menuAdmin;
       case 'PROFESOR':

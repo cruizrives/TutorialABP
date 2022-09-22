@@ -33,38 +33,72 @@ const routes: Routes = [
     path: 'perfil', component: AdminLayoutComponent, canActivate: [ AuthGuard ], data: {rol: '*'},
     children: [
       { path: '', component: PerfilComponent, data: {
-                                    titulo: 'Perfil',
-                                    breadcrums: []
-                                  },},
+      titulo: 'Perfil',
+      breadcrums: []
+      },},
+    ]
+  },
+
+  {
+    path:'admin', component: AdminLayoutComponent, canActivate: [AuthGuard], data: {rol: 'ADMIN'},children: [
+
+      // Si pongo dashboard y nada más me lleva al dashboard
+      {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: {
+        rol: 'ADMIN',
+        titulo: 'Dashboard admin',
+        breadcrumbs:[] // En breadcrums indicamos el elemento que va antes
+      }},
+
+      {path:'usuarios', component: UsuariosComponent,  canActivate: [AuthGuard],data: {
+        rol: 'ADMIN',
+        titulo: 'Usuarios admin',
+        breadcrumbs:[]
+
+      }},
+
+      {path:'usuarios/usuario/:uid', component: UsuarioComponent, data: {
+        rol: 'ADMIN',
+        titulo: 'Usuario admin',
+        breadcrumbs:[ {titulo: 'Usuarios', url:'/admin/usuarios'}]
+
+      }},
+
+      {path:'**', redirectTo:'dashboard'},
     ]
   },
 
 
   {
-    path:'dashboard', component: AdminLayoutComponent, canActivate: [AuthGuard],
-    children: [
+    path:'prof', component: AdminLayoutComponent, canActivate: [AuthGuard], data: {rol: 'PROFESOR'},children: [
 
       // Si pongo dashboard y nada más me lleva al dashboard
-      {path:'', component: DashboardComponent, data: {
-        titulo: 'Dashboard',
+      {path:'dashboard', component: DashboardComponent,  canActivate: [AuthGuard], data: {
+        rol: 'PROFESOR',
+        titulo: 'Dashboard prof',
         breadcrumbs:[] // En breadcrums indicamos el elemento que va antes
       }},
 
-      {path:'usuarios', component: UsuariosComponent, data: {
-        titulo: 'Usuarios',
-        breadcrumbs:[ {titulo: 'Dashboard', url:'/dashboard'}]
-
-      }},
-
-      {path:'usuario', component: UsuarioComponent, data: {
-        titulo: 'Usuario',
-        breadcrumbs:[ {titulo: 'Dashboard', url:'/dashboard'}]
-
-      }},
-
-      {path:'**', redirectTo:''},
+      {path:'**', redirectTo:'dashboard'},
     ]
   },
+
+  {
+    path:'alu', component: AdminLayoutComponent, canActivate: [AuthGuard], data: {rol: 'ALUMNO'},children: [
+
+      // Si pongo dashboard y nada más me lleva al dashboard
+      {path:'dashboard', component: DashboardComponent,  canActivate: [AuthGuard], data: {
+        rol: 'ALUMNO',
+        titulo: 'Dashboard alu',
+        breadcrumbs:[] // En breadcrums indicamos el elemento que va antes
+      }},
+
+      {path:'**', redirectTo:'dashboard'},
+    ]
+  },
+
+
+
+
 ]
 
 @NgModule({

@@ -61,7 +61,8 @@ export class LoginComponent implements OnInit {
     // Indicamos el subscribe porque la función login es observable lo que indica que necesita de una respuesta
     this.usuarioService.login(this.loginForm.value).subscribe({
       next: ()=>{
-        this.router.navigateByUrl('/dashboard');
+        // Hemos cambiado las rutas
+        // this.router.navigateByUrl('/dashboard');
 
         if (this.loginForm.get('remember')?.value){
           // Le indicamos con el ! que estamos seguros de que este campo no llegará vacío
@@ -71,6 +72,19 @@ export class LoginComponent implements OnInit {
           localStorage.removeItem('email');
         }
         this.waiting=false;
+
+        // Redirigimos dependiendo del rol que tenga el usuario
+        switch (this.usuarioService.rol) {
+          case 'ADMIN':
+            this.router.navigateByUrl('/admin/dashboard');
+            break;
+          case 'ALUMNO':
+            this.router.navigateByUrl('/alu/dashboard');
+            break;
+          case 'PROFESOR':
+            this.router.navigateByUrl('/prof/dashboard');
+            break;
+        }
 
       },
       error: (err:any)=>{

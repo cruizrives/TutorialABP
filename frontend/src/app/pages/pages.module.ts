@@ -8,22 +8,36 @@ import { UsuariosComponent } from './admin/usuarios/usuarios.component';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbComponent } from '../commons/breadcrumb/breadcrumb.component';
 import { ProgressbarComponent } from '../components/progressbar/progressbar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsuarioComponent } from './admin/usuario/usuario.component';
+import { DashboardprofComponent } from './prof/dashboardprof/dashboardprof.component';
+import { DashboardaluComponent } from './alu/dashboardalu/dashboardalu.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { PaginationComponent } from '../components/progressbar/pagination/pagination.component';
 
 
 
 @NgModule({
   declarations: [
+    AdminLayoutComponent,
     SidebarComponent,
     NavbarComponent,
     DashboardComponent,
-    AdminLayoutComponent,
     UsuariosComponent,
     BreadcrumbComponent,
     ProgressbarComponent,
+    UsuarioComponent,
+    DashboardprofComponent,
+    DashboardaluComponent,
+    PerfilComponent,
+    PaginationComponent
+
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }
