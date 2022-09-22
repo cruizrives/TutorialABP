@@ -8,7 +8,7 @@ const fs = require('fs');
 // Subir los archivos
 const subirArchivo = async(req, res = response) => {
 
-    // Comprobar so se ha enviado un archivo
+    // Comprobar si se ha enviado un archivo
     if (!req.files || Object.keys(req.files).length === 0){
         return res.status(400).json({
             ok: false,

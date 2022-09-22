@@ -34,6 +34,12 @@ const token = async(req, res=response) => {
             msg: 'Token',
             rol: nrol,
             _id: uid,
+            nombre: usuarioBD.nombre,
+            apellidos: usuarioBD.apellidos,
+            email: usuarioBD.email,
+            alta: usuarioBD.alta,
+            activo: usuarioBD.activo,
+            imagen: usuarioBD.imagen,
             token:nuevoToken
         });
         

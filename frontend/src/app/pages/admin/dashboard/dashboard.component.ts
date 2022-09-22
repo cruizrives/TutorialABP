@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  // Angular puede generar un unsafe para prevenir que nadie acceda y descargue alguien por error, pero en mi caso no ha ocurrido
+  authUrl = '?token=' + this.usuarioService.token;
+  constructor(private usuarioService:UsuarioService) { }
 
   ngOnInit(): void {
   }

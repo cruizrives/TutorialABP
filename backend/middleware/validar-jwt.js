@@ -6,7 +6,8 @@ const jwt = require('jsonwebtoken');
 const validarJWT = (req, res, next) => {
 
     // Extraemos el token de la cabecera x-token
-    const token = req.header('x-token');
+    // Le indicamos que el token puede venir en el header o en la query
+    const token = req.header('x-token') || req.query.token;
     
     if (!token) {
         return res.status(400).json({
